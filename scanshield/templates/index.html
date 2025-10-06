@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}ScanShield - Accueil{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Section Hero -->
+    <div class="row align-items-center py-5">
+        <div class="col-lg-6">
+            <h1 class="display-4 mb-4" style="color: #000000;">
+                Protégez-vous contre les URL malveillantes
+            </h1>
+            <p class="lead mb-4" style="color: #000000;">
+                ScanShield utilise l'intelligence artificielle pour détecter et vous protéger 
+                contre les sites web malveillants en temps réel.
+            </p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{{ url_for('scan') }}" class="btn btn-primary btn-lg px-4 me-md-2">
+                    Commencer l'analyse
+                </a>
+                <a href="{{ url_for('auth') }}" class="btn btn-outline-primary btn-lg px-4">
+                    Créer un compte
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <img src="{{ url_for('static', filename='logo.svg') }}" alt="ScanShield Logo" class="img-fluid">
+        </div>
+    </div>
+
+    <!-- Section Caractéristiques -->
+    <div class="row py-5">
+        <div class="col-12 text-center">
+            <h2 class="mb-5" style="color: #000000;">Nos fonctionnalités</h2>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="glass-card h-100">
+                <div class="text-center mb-3">
+                    <i class="fas fa-shield-alt fa-2x" style="color: #000000;"></i>
+                </div>
+                <h3 class="text-center mb-3" style="color: #000000;">Protection en temps réel</h3>
+                <p style="color: #000000;">
+                    Analyse instantanée des URLs pour détecter les menaces potentielles avant 
+                    que vous ne visitiez le site.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="glass-card h-100">
+                <div class="text-center mb-3">
+                    <i class="fas fa-brain fa-2x" style="color: #000000;"></i>
+                </div>
+                <h3 class="text-center mb-3" style="color: #000000;">Intelligence Artificielle</h3>
+                <p style="color: #000000;">
+                    Utilisation de modèles de Machine Learning avancés pour une détection 
+                    précise des URLs malveillantes.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="glass-card h-100">
+                <div class="text-center mb-3">
+                    <i class="fas fa-chart-line fa-2x" style="color: #000000;"></i>
+                </div>
+                <h3 class="text-center mb-3" style="color: #000000;">Analyse détaillée</h3>
+                <p style="color: #000000;">
+                    Obtenez des rapports détaillés sur chaque analyse avec le niveau de 
+                    confiance de la prédiction.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Pourquoi nous choisir -->
+    <div class="row py-5">
+        <div class="col-12 text-center">
+            <h2 class="mb-5" style="color: #000000;">Pourquoi choisir ScanShield ?</h2>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="glass-card">
+                <h4 style="color: #000000;">
+                    <i class="fas fa-check-circle me-2" style="color: #000000;"></i>
+                    Fiabilité
+                </h4>
+                <p style="color: #000000;">
+                    Notre système utilise des algorithmes de pointe pour une détection précise 
+                    des menaces.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="glass-card">
+                <h4 style="color: #000000;">
+                    <i class="fas fa-bolt me-2" style="color: #000000;"></i>
+                    Rapidité
+                </h4>
+                <p style="color: #000000;">
+                    Résultats instantanés pour une protection en temps réel contre les menaces.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="glass-card">
+                <h4 style="color: #000000;">
+                    <i class="fas fa-lock me-2" style="color: #000000;"></i>
+                    Sécurité
+                </h4>
+                <p style="color: #000000;">
+                    Protection avancée contre les sites malveillants et les tentatives de phishing.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

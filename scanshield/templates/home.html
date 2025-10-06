@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="About Our Cybersecurity Services" />
+    <meta name="author" content="SANJAY SIKDAR" />
+    <link rel="icon" href="https://znas.in/favicon.png" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <title>ABOUT US | CYBERSECURITY</title>
+
+    <style>
+      :root {
+        --matrix-green: #00ff41;
+        --matrix-dark-green: #002b00;
+        --terminal-black: #0c0c0c;
+        --midnight-blue: #0a192f;
+        --dark-slate: #1e2a3a;
+        --light-slate: #8892b0;
+        --code-yellow: #ffcc00;
+        --danger: #ff1e56;
+        --secure: #43ffaf;
+        --warning: #ffdd40;
+        --terminal-green: #43ffaf;
+        --terminal-blue: #268bd2;
+        --highlight: #4d5bce;
+      }
+      
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: var(--midnight-blue);
+        color: #e6f1ff;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* MATRIX BACKGROUND */
+      .matrix-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        opacity: 0.07;
+        overflow: hidden;
+      }
+
+      .matrix-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      /* BINARY LINES ACCENT */
+      .binary-line {
+        position: fixed;
+        height: 100vh;
+        width: 1px;
+        top: 0;
+        background: linear-gradient(to bottom, 
+                    transparent 10%, 
+                    rgba(85, 194, 112, 0.875) 45%, 
+                    rgba(94, 229, 128, 0.945) 50%,
+                    rgba(86, 253, 128, 0.834) 55%, 
+                    transparent 90%);
+        z-index: -1;
+        opacity: 0.3;
+      }
+
+      /* MAIN STYLING */
+      .mono {
+        font-family: 'JetBrains Mono', monospace;
+        letter-spacing: -0.5px;
+      }
+
+      .terminal-container {
+        background-color: rgba(14, 20, 33, 0.8);
+        border: 1px solid rgba(136, 146, 176, 0.2);
+        border-radius: 8px;
+        box-shadow: 0 5px 30px rgba(2, 12, 27, 0.7);
+        backdrop-filter: blur(4px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .terminal-header {
+        background-color: rgba(17, 24, 39, 0.9);
+        border-bottom: 1px solid rgba(136, 146, 176, 0.2);
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .terminal-button {
+        background-color: rgba(67, 255, 175, 0.1);
+        border: 1px solid var(--terminal-green);
+        color: var(--terminal-green);
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .terminal-button:hover {
+        background-color: rgba(67, 255, 175, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 2px 10px rgba(67, 255, 175, 0.3);
+      }
+
+      .terminal-button:active {
+        transform: translateY(0);
+      }
+
+      .cursor {
+        display: inline-block;
+        width: 8px;
+        height: 15px;
+        background-color: var(--terminal-green);
+        animation: blink 1s infinite;
+        margin-left: 5px;
+        vertical-align: middle;
+      }
+
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+
+
+      .terminal-title {
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--light-slate);
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .terminal-controls {
+        display: flex;
+        gap: 8px;
+      }
+
+      .terminal-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .dot-red {
+        background-color: #ff5f56;
+      }
+
+      .dot-yellow {
+        background-color: #ffbd2e;
+      }
+
+      .dot-green {
+        background-color: #27c93f;
+      }
+
+      .terminal-body {
+        padding: 25px;
+        position: relative;
+      }
+
+      .path-indicator {
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--terminal-green);
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      .path-indicator::before {
+        content: '>';
+        color: var(--terminal-blue);
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      .logo-text {
+        color: var(--terminal-green);
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 700;
+        letter-spacing: -1px;
+        margin-bottom: 5px;
+        text-shadow: 0 0 10px rgba(67, 255, 175, 0.4);
+      }
+
+      .subtitle {
+        color: var(--light-slate);
+        font-size: 0.9rem;
+        margin-bottom: 30px;
+      }
+
+      /* ADDITIONAL EFFECTS */
+      .code-brackets {
+        position: absolute;
+        display: block;
+        opacity: 0.1;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 400px;
+        font-weight: bold;
+        z-index: -1;
+        line-height: 1;
+      }
+
+      .code-open-bracket {
+        color: var(--terminal-green);
+        top: -100px;
+        left: -100px;
+      }
+
+      .code-close-bracket {
+        color: var(--terminal-green);
+        bottom: -200px;
+        right: -100px;
+      }
+
+      /* ABOUT CONTENT */
+      .about-section {
+        background-color: rgba(10, 25, 47, 0.6);
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 25px;
+        border-left: 3px solid var(--terminal-green);
+      }
+
+      .about-title {
+        color: var(--terminal-green);
+        font-family: 'JetBrains Mono', monospace;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      .about-title i {
+        margin-right: 15px;
+      }
+
+      .team-member {
+        background-color: rgba(10, 25, 47, 0.6);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .team-member:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(2, 12, 27, 0.5);
+      }
+
+      .member-name {
+        color: var(--terminal-green);
+        font-family: 'JetBrains Mono', monospace;
+        margin-bottom: 5px;
+      }
+
+      .member-role {
+        color: var(--terminal-blue);
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+      }
+
+      .member-bio {
+        color: var(--light-slate);
+        font-size: 0.9rem;
+      }
+
+      .social-links {
+        margin-top: 15px;
+      }
+
+      .social-links a {
+        color: var(--light-slate);
+        margin-right: 10px;
+        transition: color 0.2s ease;
+      }
+
+      .social-links a:hover {
+        color: var(--terminal-green);
+      }
+
+      /* RESPONSIVE STYLES */
+      @media (max-width: 768px) {
+        .terminal-body {
+          padding: 15px;
+        }
+        
+        .logo-text {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Matrix Background -->
+    <div class="matrix-bg">
+      <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+    </div>
+    
+    <!-- Binary Lines -->
+    <div class="binary-line" style="left: 15%;"></div>
+    <div class="binary-line" style="left: 35%;"></div>
+    <div class="binary-line" style="left: 65%;"></div>
+    <div class="binary-line" style="left: 85%;"></div>
+    
+    <!-- Code Brackets Background -->
+    <span class="code-brackets code-open-bracket">{</span>
+    <span class="code-brackets code-close-bracket">}</span>
+    
+    <div class="container mt-4 mb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-11 col-sm-12">
+          <div class="terminal-container">
+            <div class="terminal-header">
+              <div class="terminal-title">
+                <i class="fas fa-info-circle"></i>
+                secure_me.sh
+              </div>
+              <div class="terminal-controls">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+              </div>
+            </div>
+            
+            <div class="terminal-body">
+              <div class="path-indicator">~/security/about $</div>
+              
+              <div class="text-center mb-4">
+                <h1 class="logo-text">ABOUT CYBERSECURITY TEAM</h1>              </div>
+              
+              <div class="about-section">
+                <h3 class="about-title">
+                  <i class="fas fa-building"></i> OUR MISSION
+                </h3>
+                <p>As part of our Cybersecurity training, we developed this phishing detection tool for the Object-Oriented Programming module.</p>
+                <p>Phishing is a fraudulent technique used to steal sensitive information through fake websites or emails. Our solution intelligently analyzes URLs to detect phishing attempts.</p>
+                <p>By identifying potential threats, we empower users to make informed decisions and safeguard their online activities.</p>
+                <p>Founded in 2025.</p>
+              </div>
+              
+              <div class="about-section">
+                <h3 class="about-title">
+                  <i class="fas fa-chart-line"></i> OUR TECHNOLOGY
+                </h3>
+                <p>Our phishing detection system utilizes machine learning algorithms trained on millions of verified phishing and legitimate URLs. The system analyzes over 50 parameters including:</p>
+                <ul>
+                  <li>URL structure and domain characteristics</li>
+                  <li>SSL certificate validity and encryption strength</li>
+                  <li>Domain age and registration details</li>
+                  <li>Blacklist status across multiple threat intelligence feeds</li>
+                  <li>Content similarity to known phishing targets</li>
+                </ul>
+                <p>We continuously update our models to adapt to new phishing techniques and attack vectors.</p>
+              </div>
+              
+              <h3 class="about-title mt-5">
+                <i class="fas fa-users"></i> MEET THE TEAM
+              </h3>
+              
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="team-member">
+                    <h4 class="member-name">OUZANZOUL BOUCHRA</h4>
+                    <div class="member-role">Cybersecurity student</div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/bouchra-ouzanzoul-a41005306?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <div class="team-member">
+                    <h4 class="member-name">ESSAIDI SARA</h4>
+                    <div class="member-role">Cybersecurity student</div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/sara-essaidi?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                        </a>                   
+                     </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="team-member">
+                    <h4 class="member-name">ELAANTARI MALIKA</h4>
+                    <div class="member-role">Cybersecurity student</div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/malika-elaantri-6118a42b9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                        </a>                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Set up Matrix Background
+        setupMatrixBackground();
+      });
+      
+      function setupMatrixBackground() {
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        window.addEventListener('resize', function() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        });
+        
+        const characters = "01";
+        const fontSize = 12;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+          drops[i] = Math.floor(Math.random() * canvas.height / fontSize);
+        }
+        
+        function draw() {
+          ctx.fillStyle = 'rgba(10, 25, 47, 0.05)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          
+          ctx.fillStyle = '#00ff41';
+          ctx.font = `${fontSize}px 'JetBrains Mono'`;
+          
+          for (let i = 0; i < drops.length; i++) {
+            const text = characters.charAt(Math.floor(Math.random() * characters.length));
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+              drops[i] = 0;
+            }
+            
+            drops[i]++;
+          }
+        }
+        
+        setInterval(draw, 80);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,507 @@
+/* Animations pour le logo */
+.logo {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
+}
+
+/* Animation de flottement pour les cartes */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+    animation: float 6s ease-in-out infinite;
+}
+
+.feature-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.25);
+}
+
+/* Animation de pulse améliorée pour les boutons */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+    }
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 15px rgba(99, 102, 241, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+    }
+}
+
+.btn-pulse {
+    animation: pulse 2s infinite;
+    background: linear-gradient(45deg, #6366f1, #3b82f6);
+    border: none;
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+.btn-pulse:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(45deg, #4f46e5, #2563eb);
+}
+
+/* Animation de fade-in améliorée */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Style pour le header avec le logo */
+.header-with-logo {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: linear-gradient(to right, rgba(99, 102, 241, 0.1), rgba(59, 130, 246, 0.1));
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.header-with-logo:hover {
+    background: linear-gradient(to right, rgba(99, 102, 241, 0.2), rgba(59, 130, 246, 0.2));
+}
+
+/* Animation pour les icônes */
+.icon-box {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.icon-box::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.icon-box:hover {
+    transform: scale(1.1);
+}
+
+.icon-box:hover::after {
+    opacity: 1;
+}
+
+/* Style pour la section héros */
+.hero-section {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+    animation: pulse 4s infinite;
+}
+
+/* Fond animé avec particules */
+.animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(45deg, #f0f9ff, #e0f2fe);
+    overflow: hidden;
+}
+
+.animated-background::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+    animation: rotateGradient 15s linear infinite;
+}
+
+@keyframes rotateGradient {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Effet de particules */
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+}
+
+/* Logo animé */
+.animated-logo {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.5));
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(5deg);
+    }
+}
+
+/* Navigation stylisée */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.nav-link {
+    position: relative;
+    color: #000000 !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+}
+
+.nav-link:hover {
+    color: #3b82f6 !important;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #6366f1);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+    transform: scaleX(1);
+}
+
+/* Conteneur principal */
+.content-wrapper {
+    min-height: calc(100vh - 160px);
+    padding: 2rem 0;
+    position: relative;
+    color: #000000;
+}
+
+/* Cartes avec effet de verre avancé */
+.glass-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    color: #000000;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(59, 130, 246, 0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.glass-card:hover::before {
+    left: 100%;
+}
+
+/* Boutons animés */
+.btn-animated {
+    background: linear-gradient(45deg, #3b82f6, #6366f1);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    transform-origin: center;
+    z-index: 1;
+}
+
+.btn-animated::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #2563eb, #4f46e5);
+    transition: 0.5s ease;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+.btn-animated:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.btn-animated:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+}
+
+/* Textes animés */
+.animated-text {
+    background: linear-gradient(45deg, #3b82f6, #6366f1, #3b82f6);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientText 3s linear infinite;
+}
+
+@keyframes gradientText {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Icônes animées */
+.icon-animated {
+    color: #3b82f6;
+    font-size: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .icon-animated {
+    transform: scale(1.1) rotate(5deg);
+    color: #2563eb;
+}
+
+/* Feature cards avec hover effect */
+.feature-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    color: #000000;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1), transparent);
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: -1;
+    transform: scale(0.8);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.1);
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Progress bar stylisée */
+.progress-container {
+    position: relative;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.progress {
+    height: 30px;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    position: relative;
+    height: 100%;
+    border-radius: 15px;
+    transition: all 1s ease;
+    animation: progressPulse 2s ease-in-out infinite;
+}
+
+@keyframes progressPulse {
+    0% { transform: scaleX(1); }
+    50% { transform: scaleX(0.99); }
+    100% { transform: scaleX(1); }
+}
+
+.progress-secure {
+    background: linear-gradient(45deg, #22c55e, #10b981);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+}
+
+.progress-danger {
+    background: linear-gradient(45deg, #ef4444, #dc2626);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000000;
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 2;
+}
+
+/* Formulaires stylisés */
+.form-control {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    color: #000000;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background: #ffffff;
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+    color: #000000;
+}
+
+.form-control::placeholder {
+    color: #666666;
+}
+
+/* Footer stylisé */
+.footer {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+    color: #000000;
+    padding: 2rem 0;
+}
+
+.social-link {
+    color: #3b82f6;
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: #2563eb;
+    transform: translateY(-3px);
+}
+
+/* Styles pour les alertes */
+.alert {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+}
+
+.alert-success {
+    background: rgba(34, 197, 94, 0.1);
+    color: #000000;
+    border-left: 4px solid #22c55e;
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: #000000;
+    border-left: 4px solid #ef4444;
+}
+
+/* Texte normal */
+body {
+    color: #000000;
+}
+
+.content-wrapper {
+    color: #000000;
+} 

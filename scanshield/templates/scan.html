@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}ScanShield - Scanner{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="glass-card mb-4">
+                <h2 class="text-center mb-4" style="color: #000000;">Analyseur d'URL</h2>
+                <form method="POST" action="{{ url_for('scan') }}">
+                    <div class="mb-3">
+                        <label for="url" class="form-label" style="color: #000000;">Entrez l'URL à analyser :</label>
+                        <input type="url" class="form-control" id="url" name="url" required 
+                               placeholder="https://exemple.com" value="{{ data.url if data else '' }}">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Analyser l'URL</button>
+                    </div>
+                </form>
+            </div>
+
+            {% if error %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Erreur :</strong> {{ error }}
+            </div>
+            {% endif %}
+
+            {% if data %}
+            <div class="glass-card">
+                <h3 class="text-center mb-4" style="color: #000000;">Résultats de l'analyse</h3>
+                
+                <div class="result-section mb-4">
+                    <h4 style="color: #000000;">URL analysée :</h4>
+                    <p style="color: #000000; word-break: break-all;">{{ data.url }}</p>
+                </div>
+
+                <div class="result-section mb-4">
+                    <h4 style="color: #000000;">Verdict :</h4>
+                    <div class="d-flex align-items-center">
+                        {% if data.prediction_label == 'safe' %}
+                        <div class="alert alert-success w-100 mb-0">
+                            <i class="fas fa-shield-check me-2"></i>
+                            <strong style="color: #000000;">URL Sécurisée</strong>
+                            <p class="mb-0" style="color: #000000;">Cette URL a été analysée et semble sûre.</p>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-danger w-100 mb-0">
+                            <i class="fas fa-shield-exclamation me-2"></i>
+                            <strong style="color: #000000;">URL Malveillante Détectée</strong>
+                            <p class="mb-0" style="color: #000000;">Cette URL présente des caractéristiques suspectes.</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="result-section">
+                    <h4 style="color: #000000;">Niveau de confiance :</h4>
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar {% if data.prediction_label == 'safe' %}progress-secure{% else %}progress-danger{% endif %}" 
+                                 role="progressbar"
+                                 aria-valuenow="{{ data.prediction_score }}"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">
+                                <span class="visually-hidden">{{ data.prediction_score }}%</span>
+                            </div>
+                        </div>
+                        <div class="progress-value" style="color: #000000;">
+                            {{ "%.1f"|format(data.prediction_score) }}%
+                        </div>
+                    </div>
+                    <p class="mt-3" style="color: #000000;">
+                        {% if data.prediction_label == 'safe' %}
+                        Cette URL a été analysée et classée comme sûre avec un niveau de confiance de {{ "%.1f"|format(data.prediction_score) }}%.
+                        {% else %}
+                        Cette URL a été identifiée comme potentiellement malveillante avec un niveau de confiance de {{ "%.1f"|format(data.prediction_score) }}%.
+                        <div class="alert alert-warning mt-3">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Attention :</strong> Il est recommandé de ne pas visiter cette URL.
+                        </div>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Mise à jour de la barre de progression
+    const progressBar = document.querySelector('.progress-bar');
+    if (progressBar) {
+        const progress = progressBar.getAttribute('aria-valuenow');
+        progressBar.style.width = progress + '%';
+    }
+});
+</script>
+{% endblock %}
